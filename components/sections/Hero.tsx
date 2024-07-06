@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic';
 import { gribertNarrow } from '../ui/fonts'
-import ThemedLogo from '@/assets/images/LogoSvg'
+
+const ThemedLogo = dynamic(() => import('@/assets/images/ThemedLogo'), { ssr: false })
 
 export type HeroType = { name: string; title: string }
 
 const Hero = ({ name, title }: HeroType) => {
   return (
-    <div className="m-auto bg-white dark:bg-black vibrant:bg-green-toy">
+    <div className="m-auto bg-white dark:bg-black vibrant:bg-green-toy snap-start	">
       <div
         className={`
-        flex justify-center items-center h-screen w-full max-w-screen-xl mx-auto`}
+        flex justify-center items-center lg:h-screen h-svh w-full max-w-screen-xl mx-auto`}
       >
         <div className="flex flex-col items-center">
           <div className="mb-10">

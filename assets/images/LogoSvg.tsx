@@ -1,42 +1,5 @@
 'use client'
 
-import { useTheme } from 'next-themes'
-import React from 'react'
-
-const ThemedLogo = ({ width, height }: { width: number; height: number }) => {
-  const { theme } = useTheme()
-
-  if (theme === 'vibrant') {
-    return (
-      <div className="w-full h-full">
-        <LogoSvg width={width} height={height} topColor="#FF7C0A" />
-      </div>
-    )
-  }
-
-  return (
-    <>
-      <div className="hidden vibrant:hidden dark:block w-full h-full">
-        <LogoSvg
-          width={width}
-          height={height}
-          topColor="black"
-          bottomColor="black"
-          stroke="white"
-        />
-      </div>
-      <div className="dark:hidden vibrant:hidden w-full h-full">
-        <LogoSvg
-          width={width}
-          height={height}
-          topColor="white"
-          bottomColor="white"
-        />
-      </div>
-    </>
-  )
-}
-
 const LogoSvg = ({
   width,
   height,
@@ -74,4 +37,4 @@ const LogoSvg = ({
   )
 }
 
-export default ThemedLogo
+export default LogoSvg

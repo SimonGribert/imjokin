@@ -1,17 +1,12 @@
 'use client'
 
+import { useHeaderColor } from '@/hooks/useHeaderColor'
+import { classNames } from '@/utils/css'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState<boolean>(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [setMounted])
-
-  if (!mounted) return null
+  const color = useHeaderColor((s) => s.color)
 
   const themes = ['dark', 'light', 'vibrant', 'system']
 
@@ -31,11 +26,16 @@ const ThemeSwitcher = () => {
     <button
       onClick={toggleThemes}
       type="button"
-      className="inline-flex items-center gap-x-2 py-2 px-3 rounded-full text-sm capitalize
-			bg-black text-white hover:bg-black/80
-		 	dark:bg-white dark:text-black dark:hover:bg-white/80 
-			vibrant:bg-orange-toy vibrant:text-black vibrant:hover:bg-orange-toy/90 
-			absolute bottom-5 right-5"
+      className={classNames(
+        `inline-flex items-center gap-x-2 py-1 px-3 text-sm capitalize
+			 text-black hover:bg-black hover:text-white
+		 	 dark:text-white dark:hover:bg-white dark:hover:text-black
+			 vibrant:text-black
+			    fixed lg:bottom-12 bottom-5 right-5`,
+        'outline-black outline outline-2 outline-offset-[-1px]',
+        'dark:outline-white',
+        color ? 'vibrant:hover:bg-green-toy' : 'vibrant:hover:bg-orange-toy',
+      )}
     >
       {theme === 'vibrant' ? (
         <svg
@@ -93,7 +93,7 @@ const ThemeSwitcher = () => {
           </svg>
         </>
       )}
-      {theme}
+      <span className="lg:block hidden">{theme}</span>
     </button>
   )
 }
